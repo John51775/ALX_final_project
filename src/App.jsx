@@ -1,19 +1,25 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
+import RecipeCard from "./components/RecipeCard";
+import RecipeDetails from "./components/RecipeDetails";
+import Footer from "./components/footer";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
+  // Handle search from SearchBar
   const handleSearch = (query) => {
     setSearchQuery(query);
   };
 
+  // Fetch recipes whenever searchQuery changes
   useEffect(() => {
-    if (!searchQuery) return; // Don't fetch if query is empty
+    if (!searchQuery) return;
 
     const fetchRecipes = async () => {
       setLoading(true);
@@ -26,9 +32,9 @@ function App() {
         const data = await response.json();
 
         if (data.meals) {
-          setRecipes(data.meals); // API returns meals array
+          setRecipes(data.meals);
         } else {
-          setRecipes([]); // No results found
+          setRecipes([]);
         }
       } catch (err) {
         setError("Failed to fetch recipes. Please try again.");
@@ -40,12 +46,23 @@ function App() {
     fetchRecipes();
   }, [searchQuery]);
 
+  // When a card is clicked, show modal
+  const handleCardClick = (recipe) => {
+    setSelectedRecipe(recipe);
+  };
+
+  // Close modal
+  const handleCloseModal = () => {
+    setSelectedRecipe(null);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       <Header />
+      <div className="flex-grow">
       <SearchBar onSearch={handleSearch} />
 
-      {/* Show loading, error, or recipe count */}
+      {/* Loading / Error / No Results */}
       {loading && <p className="text-center mt-4">Loading recipes...</p>}
       {error && <p className="text-center mt-4 text-red-500">{error}</p>}
       {!loading && !error && searchQuery && recipes.length === 0 && (
@@ -54,13 +71,26 @@ function App() {
         </p>
       )}
 
-      {/* Recipe list will go here */}
+      {/* Recipe Grid */}
       {!loading && !error && recipes.length > 0 && (
-        <p className="text-center mt-4 text-gray-600">
-          Showing {recipes.length} results for{" "}
-          <span className="font-bold">{searchQuery}</span>
-        </p>
+        <div className="px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {recipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.idMeal}
+              recipe={recipe}
+              onClick={handleCardClick}
+            />
+          ))}
+        </div>
       )}
+
+      {/* Recipe Details Modal */}
+      {selectedRecipe && (
+        <RecipeDetails recipe={selectedRecipe} onClose={handleCloseModal} />
+      )}
+      </div>
+      
+      <Footer />
     </div>
   );
 }
