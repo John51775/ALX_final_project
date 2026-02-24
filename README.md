@@ -1,16 +1,90 @@
-# React + Vite
+Flex Recipe Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive Recipe Finder web application built with React, Vite, and Tailwind CSS.
+Users can search for meals by name and view detailed recipe information including ingredients, preparation steps, and video tutorials.
 
-Currently, two official plugins are available:
+ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Search recipes by dish name
 
-## React Compiler
+- Fetch data from TheMealDB API
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Display recipe cards with image, category, and cuisine
 
-## Expanding the ESLint configuration
+- View detailed recipe information in a modal
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Dynamic ingredient list extraction
+
+- Embedded YouTube cooking tutorial (if available)
+
+- Error handling and loading states
+
+- Fully responsive design using Tailwind CSS
+
+- Footer with dynamic copyright year
+
+ Tech Stack
+
+React
+
+Vite
+
+Tailwind CSS
+
+JavaScript (ES6+)
+
+TheMealDB API
+
+API Used
+
+This project uses the free API from:
+
+TheMealDB
+https://www.themealdb.com/
+
+Example endpoint:
+https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+
+Project Structure
+
+src/
+ ├── components/
+ │   ├── Header.jsx
+ │   ├── SearchBar.jsx
+ │   ├── RecipeCard.jsx
+ │   ├── RecipeDetails.jsx
+ │   └── Footer.jsx
+ ├── App.jsx
+ └── main.jsx
+
+  What I Learned
+
+Managing state with useState
+
+Fetching data using useEffect
+
+Handling loading and error states
+
+Building reusable React components
+
+Working with dynamic API data structures
+
+Creating responsive layouts using Tailwind CSS
+
+Installation & Setup
+
+1. Clone the repository: git clone <your-repo-link>
+2. Navigate into the project folder: eg. cd recipe-finder
+3. Install dependencies: npm install
+4. Start the development server: npm run dev
+
+Deployment
+
+The application can be deployed using:
+
+Netlify
+Vercel
+GitHub Pages
+
+Author.
+John Ngugi
