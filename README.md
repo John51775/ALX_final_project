@@ -88,5 +88,7 @@ GitHub Pages
 
 live demo: https://alx-final-project-rho.vercel.app/
 
+live demo: https://alx-final-project-rho.vercel.app/
+
 Author.
 John Ngugi
